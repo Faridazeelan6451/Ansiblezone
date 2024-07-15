@@ -1,14 +1,7 @@
 ---
 - name : install tomcat on ubuntu
   become : yes
-  hosts : all
-  java_package : openjdk-11-jdk
-  user_name : tomcat
-  group_name : tomcat
-  home_directory: /opt/tomcat
-  default_shell : /bin/false
-
-
+  hosts : ubuntu
   tasks:
     - name : install java
       ansible.builtin.apt :
