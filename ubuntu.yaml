@@ -20,5 +20,9 @@
         group : "{{ group_name }}"
         shell : "{{ default_shell }}"
         state : present
+    - name : download tomcat
+      ansible.builtin.get_url:
+        url: https://www-eu.apache.org/dist/tomcat/tomcat-10/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz 
+        dest: /tmp
       
       
