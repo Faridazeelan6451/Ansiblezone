@@ -1,0 +1,31 @@
+---
+- name : install tomcat on ubuntu
+  become : yes
+  hosts : all
+  java_package : openjdk-11-jdk
+  user_name : tomcat
+  group_name : tomcat
+  home_directory: /opt/tomcat
+  default_shell : /bin/false
+
+
+  tasks:
+    - name : install java
+      ansible.builtin.apt :
+        name : "{{ java_package }}"
+        update_cache: yes
+        state : present
+    - name : add group
+      ansible.builtin.group:
+        name : "{{ group_name }}"
+        state : present
+    - name: Add tomcat user on ubuntu
+      ansible.builtin.user:
+        name: "{{ user_name }}"
+        create_home : true
+        home : "{{ home_directory }}"
+        group : "{{ group_name }}"
+        shell : "{{ default_shell }}"
+        state : present
+      
+      
