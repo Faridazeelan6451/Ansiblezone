@@ -2,6 +2,6 @@
 java_package : openjdk-11-jdk
 user_name : tomcat
 group_name : tomcat
-home_directory: /opt/tomcat
+home_directory: /opt/tomcat/
 default_shell : /bin/false
 tomcat_version : "10.1.26"
