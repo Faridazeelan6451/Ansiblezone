@@ -20,10 +20,52 @@
         group : "{{ group_name }}"
         shell : "{{ default_shell }}"
         state : present
-    - name : download tomcat
+    - name : download and extract  tomcat
       ansible.builtin.unarchive:
         src: https://www-eu.apache.org/dist/tomcat/tomcat-10/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz 
         dest: "{{ home_directory }}"
         remote_src: yes
+    
+    - name : create symbolic link
+      ansible.builtin.file:
+        src: "{{ home_directory }}/apache-tomcat-{{ tomcat_version }}"
+        dest: "{{ home_directory }}/latest"
+        owner: "{{ user_name }}"
+        group: "{{ group_name }}"
+        state: link
+
+    - name : Recursivly change the ownership of directory
+      ansible.builtin.file:
+        path : "{{ home_directory }}"
+        state: directory
+        recurse: yes
+        owner: "{{ user_name }}"
+        group: "{{ group_name }}"
+
+    - name : Add executable permission to other files
+      ansible.builtin.shell:
+        cmd : chmod +x /opt/tomcat/latest/bin/*.sh
+        executable: /bin/bash
+    
+    - name : copy context to tomcat service
+      ansible.builtin.copy:
+        src: tomcat.service
+        dest: /etc/systemd/system/tomcat.service
+        owner: "{{ user_name }}"
+        group: "{{ group_name }}"
+
+    - name : Enable and start tomcat service
+      ansible.builtin.systemd:
+        name : tomcat
+        enabled: true
+        state: started
+          
+    - name : restart tomcat service
+      ansible.builtin.systemd:
+        name : tomcat
+        enabled: true
+        state: restarted
+
+    
       
       
