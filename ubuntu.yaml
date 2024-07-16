@@ -3,6 +3,11 @@
   become : yes
   hosts : ubuntu
   tasks:
+    - name : Fail when distribution is not ubuntu
+      ansible.builtin.fail:
+        msg: This playbook will fail if the distribution is other than ubuntu
+      when : ansible_facts['distribution'] != 'Ubuntu'
+    
     - name : install java
       ansible.builtin.apt :
         name : "{{ java_package }}"
@@ -84,30 +89,6 @@
         - {src: context.xml , dest : /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml}
       notify:
         - restart tomcat service
-
-    
-    # - name : add tomcat users
-    #   ansible.builtin.copy:
-    #     src : tomcat-users.xml
-    #     dest : /opt/tomcat/latest/conf/tomcat-users.xml
-      
-    #   notify:
-    #     - restart tomcat service
-    
-    # - name : add manager config
-    #   ansible.builtin.copy:
-    #     src : context.xml
-    #     dest : /opt/tomcat/latest/webapps/manager/META-INF/context.xml
-
-    #   notify:
-    #     - restart tomcat service
-      
-    # - name : add host manager config
-    #   ansible.builtin.copy:
-    #     src : context.xml
-    #     dest : /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml
-    #   notify:
-    #     - restart tomcat service    
   
   handlers:
      - name : restart tomcat service
