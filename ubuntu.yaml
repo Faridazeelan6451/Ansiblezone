@@ -65,6 +65,23 @@
         name : tomcat
         enabled: true
         state: restarted
+    
+    - name : add tomcat users
+      ansible.builtin.copy:
+        src : tomcat-users.xml
+        dest : /opt/tomcat/latest/conf/tomcat-users.xml
+    
+    - name : add manager config
+      ansible.builtin.copy:
+        src : context.xml
+        dest : /opt/tomcat/latest/webapps/manager/META-INF/context.xml
+
+    - name : add host manager config
+      ansible.builtin.copy:
+        src : context.xml
+        dest : /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml
+      
+
 
     
       
