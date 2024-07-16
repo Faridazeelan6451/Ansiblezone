@@ -23,7 +23,7 @@
     - name : download and extract  tomcat
       ansible.builtin.unarchive:
         src: https://www-eu.apache.org/dist/tomcat/tomcat-10/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz 
-        dest: "{{ home_directory }}"
+        dest: /opt/tomcat/
         remote_src: yes
     
     - name : create symbolic link
@@ -59,7 +59,7 @@
         name : tomcat
         enabled: true
         state: started
-          
+
     - name : restart tomcat service
       ansible.builtin.systemd:
         name : tomcat
