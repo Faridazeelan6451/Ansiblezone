@@ -23,6 +23,15 @@
         shell : "{{ default_shell }}"
         state : present
     
+    - name : Get tomcat stats
+      ansible.builtin.stat:
+        path : "{{ home_directory }}/apache-tomcat-{{ tomcat_version }}"
+      registry: tomcat_folder
+        
+    - name : print stats
+      ansible.builtin.debug:
+        var : tomcat_folder
+    
     - name : download and extract  tomcat
       ansible.builtin.unarchive:
         src: https://www-eu.apache.org/dist/tomcat/tomcat-10/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz 
