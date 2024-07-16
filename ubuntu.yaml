@@ -30,14 +30,14 @@
 
     - name : print stats
       ansible.builtin.debug:
-        var : tomcat_folder
+        var : tomcat_folder.stat.exists
     
     - name : download and extract  tomcat
       ansible.builtin.unarchive:
         src: https://www-eu.apache.org/dist/tomcat/tomcat-10/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz 
         dest: "{{ home_directory }}"
         remote_src: yes
-      
+      when : tomcat_folder.stat.exists == false
       notify:
        - Add executable permission to other files
            
@@ -96,6 +96,7 @@
         dest : /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml
       notify:
         - restart tomcat service    
+  
   handlers:
      - name : restart tomcat service
        ansible.builtin.systemd:
