@@ -26,8 +26,8 @@
     - name : Get tomcat stats
       ansible.builtin.stat:
         path : "{{ home_directory }}/apache-tomcat-{{ tomcat_version }}"
-      registry: tomcat_folder
-        
+      register: tomcat_folder
+
     - name : print stats
       ansible.builtin.debug:
         var : tomcat_folder
