@@ -23,7 +23,7 @@
     - name : download and extract  tomcat
       ansible.builtin.unarchive:
         src: https://www-eu.apache.org/dist/tomcat/tomcat-10/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz 
-        dest: /opt/tomcat/
+        dest: "{{ home_directory }}"
         remote_src: yes
     
     - name : create symbolic link
