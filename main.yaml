@@ -1,15 +1,15 @@
 ---
-- name : install tomcat on ubuntu
+- name : install tomcat on ubuntu and redhat
   become : yes
-  hosts : ubuntu
+  hosts : all
   tasks:
-    - name : Fail when distribution is not ubuntu
+    - name : Fail when distribution is not ubuntu and redhat
       ansible.builtin.fail:
         msg: This playbook will fail if the distribution is other than ubuntu
-      when : ansible_facts['distribution'] != 'Ubuntu'
+      when : ansible_facts['distribution'] != 'Ubuntu' and 'RedHat'
     
     - name : install java
-      ansible.builtin.apt :
+      ansible.builtin.package :
         name : "{{ java_package }}"
         update_cache: yes
         state : present
