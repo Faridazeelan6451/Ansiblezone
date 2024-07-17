@@ -1,4 +1,6 @@
 [ubuntu]
 node-2
 [redhat]
-node-3
+node-3 
+java_package : java-1.8.0-openjdk-devel 
+java_home_dir : /usr/lib/jvm/jre
