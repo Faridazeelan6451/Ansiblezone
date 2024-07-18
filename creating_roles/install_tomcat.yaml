@@ -2,6 +2,6 @@
 - name: install tomcat
   hosts: appserver
   roles:
-    role : tomcat
-    become: yes
-    
+    - role : tomcat
+      become: yes
+
