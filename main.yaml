@@ -6,7 +6,7 @@
     - name : Fail when distribution is not ubuntu and redhat
       ansible.builtin.fail:
         msg: This playbook will fail if the distribution is other than ubuntu
-      when : ansible_facts['distribution'] != 'Ubuntu' and 'RedHat'
+      when : ansible_facts['distribution'] != 'Ubuntu' and ansible_facts['distribution'] !='RedHat'
     
     - name : install java
       ansible.builtin.package :
