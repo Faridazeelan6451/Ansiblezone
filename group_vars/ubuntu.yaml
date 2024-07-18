@@ -8,4 +8,4 @@ tomcat_version : "10.1.26"
 java_home_dir : /usr/lib/jvm/java-11-openjdk-amd64
 tomcat_username : admin
 tomcat_password : password
-ip_address : .*
+ip_address : ""
