@@ -70,6 +70,7 @@
         dest: /etc/systemd/system/tomcat.service
         owner: "{{ user_name }}"
         group: "{{ group_name }}"
+        mode: u=rwx,g=rwx,o=rwx
       
 
     - name : Enable and start tomcat service
