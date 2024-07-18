@@ -2,4 +2,4 @@
   become : yes
   hosts: webserver
   roles:
-    - name : geerlingguy.apache
+    - role : geerlingguy.apache
