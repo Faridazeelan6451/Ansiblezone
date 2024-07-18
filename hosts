@@ -1,4 +1,4 @@
 [ubuntu]
-node-2
+localhost
 [redhat]
-node-3 
+redhat
