@@ -1,0 +1,12 @@
+---
+
+- name : restart tomcat service
+  ansible.builtin.systemd:
+    name : tomcat
+    enabled: true
+    state: restarted
+
+- name : Add executable permission to other files
+  ansible.builtin.shell:
+    cmd : chmod +x /opt/tomcat/latest/bin/*.sh
+    executable: /bin/bash
