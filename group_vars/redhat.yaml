@@ -1,6 +1,6 @@
 ---
 java_package : java-1.8.0-openjdk-devel
-java_home_dir : /usr/lib/jvm/jre
+java_home_dir : /usr/lib/jvm/java-11-openjdk
 user_name : tomcat
 group_name : tomcat
 home_directory: /opt/tomcat
