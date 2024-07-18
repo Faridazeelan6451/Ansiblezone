@@ -75,8 +75,8 @@
     - name : Enable and start tomcat service
       ansible.builtin.systemd:
         name : tomcat
-        enabled: true
         state: started
+        enabled: true
 
     - name : Adding tomcat configuration
       ansible.builtin.copy:
