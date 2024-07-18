@@ -65,7 +65,7 @@
 
 
     - name : copy context to tomcat service
-      ansible.builtin.copy:
+      ansible.builtin.template:
         src: tomcat.service.j2
         dest: /etc/systemd/system/tomcat.service
         owner: "{{ user_name }}"
@@ -79,7 +79,7 @@
         enabled: true
 
     - name : Adding tomcat configuration
-      ansible.builtin.copy:
+      ansible.builtin.template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
       loop:
