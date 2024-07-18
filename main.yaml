@@ -86,9 +86,9 @@
         dest: "{{ item.dest }}"
         remote_src: yes
       loop:
-        - {src : /templates/tomcat-users.xml.j2, dest : /opt/tomcat/latest/conf/tomcat-users.xml }
-        - {src: /templates/context.xml.j2 , dest : /opt/tomcat/latest/webapps/manager/META-INF/context.xml}
-        - {src: /templates/context.xml.j2 , dest : /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml}
+        - {src : ./templates/tomcat-users.xml.j2, dest : /opt/tomcat/latest/conf/tomcat-users.xml }
+        - {src: ./templates/context.xml.j2 , dest : /opt/tomcat/latest/webapps/manager/META-INF/context.xml}
+        - {src: ./templates/context.xml.j2 , dest : /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml}
 
       notify:
         - restart tomcat service
