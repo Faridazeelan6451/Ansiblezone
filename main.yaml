@@ -70,6 +70,7 @@
         dest: /etc/systemd/system/tomcat.service
         owner: "{{ user_name }}"
         group: "{{ group_name }}"
+        remote_src: yes
         mode: u=rwx,g=rwx,o=rwx
       
 
@@ -83,10 +84,12 @@
       ansible.builtin.template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
+        remote_src: yes
       loop:
         - {src : /templates/tomcat-users.xml.j2, dest : /opt/tomcat/latest/conf/tomcat-users.xml }
         - {src: /templates/context.xml.j2 , dest : /opt/tomcat/latest/webapps/manager/META-INF/context.xml}
         - {src: /templates/context.xml.j2 , dest : /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml}
+
       notify:
         - restart tomcat service
   
