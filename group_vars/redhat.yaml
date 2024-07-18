@@ -1,0 +1,11 @@
+---
+java_package : java-1.8.0-openjdk-devel
+java_home_dir : /usr/lib/jvm/jre
+user_name : tomcat
+group_name : tomcat
+home_directory: /opt/tomcat
+default_shell : /bin/false
+tomcat_version : "10.1.26"
+tomcat_username : admin
+tomcat_password : password
+ip_address : .*
