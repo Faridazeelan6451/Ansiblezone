@@ -1,0 +1,5 @@
+- name : install apache
+  become : yes
+  hosts: webserver
+  roles:
+    - name : geerlingguy.apache
