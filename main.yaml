@@ -66,14 +66,12 @@
 
     - name : copy context to tomcat service
       ansible.builtin.template:
+        
         src: ./templates/tomcat.service.j2
         dest: /etc/systemd/system/tomcat.service
         owner: "{{ user_name }}"
         group: "{{ group_name }}"
-        remote_src: yes
-        mode: u=rwx,g=rwx,o=rwx
-      
-
+    
     - name : Enable and start tomcat service
       ansible.builtin.systemd:
         name : tomcat
@@ -82,9 +80,9 @@
 
     - name : Adding tomcat configuration
       ansible.builtin.template:
+        remote_src: yes
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
-        remote_src: yes
       loop:
         - {src : ./templates/tomcat-users.xml.j2, dest : /opt/tomcat/latest/conf/tomcat-users.xml }
         - {src: ./templates/context.xml.j2 , dest : /opt/tomcat/latest/webapps/manager/META-INF/context.xml}
