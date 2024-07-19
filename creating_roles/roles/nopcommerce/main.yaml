@@ -11,8 +11,7 @@
       ansible.builtin.get_url:
         url : "{{ debian_package }}"
         dest : /tmp/packages-microsoft-prod.deb
-        remote_src: yes
-      
+            
     - name : install debian package    
       ansible.builtin.apt:
         name : /tmp/packages-microsoft-prod.deb
