@@ -57,7 +57,7 @@
     - name : Recurcively change permission of nopcommerce file 
       ansible.builtin.file:
         path : nopCommerce/
-        state: file
+        state: directory
         recurse: yes
         owner: www-data
         group: www-data
