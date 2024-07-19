@@ -9,16 +9,16 @@
       when: ansible_facts['distribution'] != 'Ubuntu'
     - name : dowload and install debian packages
       ansible.builtin.unarchive:
-        src : {{ debian_package }}
+        src : "{{ debian_package }}"
         dest : /home
         remote_src: yes
 
     - name : install reguired packages(dotnet, unzip and ngnix)
       ansible.builtin.package:
         name : 
-         - {{ dotnet_package }}
+         - "{{ dotnet_package }}"
          - unzip
-         - {{ nginx_service}}
+         - "{{ nginx_service}}"
         state : present
     
     - name : start ngnix service
