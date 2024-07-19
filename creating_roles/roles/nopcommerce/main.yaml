@@ -23,7 +23,7 @@
     
     - name : start ngnix service
       ansible.builtin.systemd:
-        name : {{ nginx_service}}
+        name : "{{ nginx_service}}"
         state: started
     
     - name : ngnix servercongiguration
