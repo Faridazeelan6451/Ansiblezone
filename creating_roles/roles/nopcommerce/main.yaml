@@ -9,7 +9,7 @@
       when: ansible_facts['distribution'] != 'Ubuntu'
     - name : dowload and install debian packages
       ansible.builtin.get_url:
-        src : "{{ debian_package }}"
+        url : "{{ debian_package }}"
         dest : /tmp/packages-microsoft-prod.deb
         remote_src: yes
       
@@ -17,7 +17,7 @@
       ansible.builtin.apt:
         name : /tmp/packages-microsoft-prod.deb
         state: present
-        
+
     - name : install reguired packages(dotnet, unzip and ngnix)
       ansible.builtin.package:
         name : 
