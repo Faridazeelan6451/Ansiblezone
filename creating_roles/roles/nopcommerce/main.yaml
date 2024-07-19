@@ -12,8 +12,8 @@
         src : "{{ debian_package }}"
         dest : /tmp/packages-microsoft-prod.deb
         remote_src: yes
-      ansible.builtin.apt:
-        name : packages-microsoft-prod.deb
+      # ansible.builtin.apt:
+      #   name : packages-microsoft-prod.deb
 
     - name : install reguired packages(dotnet, unzip and ngnix)
       ansible.builtin.package:
