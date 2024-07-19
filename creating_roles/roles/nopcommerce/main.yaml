@@ -64,7 +64,7 @@
     
     - name : configure nop service
       ansible.builtin.template:
-        src : ./templates/server-configuration.j2
+        src : ./templates/nop-service.j2
         dest: /etc/systemd/system/nopCommerce.service
     
     - name : Start nopservice
