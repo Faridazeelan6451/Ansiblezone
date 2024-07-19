@@ -21,6 +21,7 @@
       ansible.builtin.package:
         name : 
          - "{{ dotnet_package }}"
+         - apt-transport-https
          - unzip
          - "{{ nginx_service}}"
         state : present
