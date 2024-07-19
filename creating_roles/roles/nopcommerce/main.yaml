@@ -10,8 +10,10 @@
     - name : dowload and install debian packages
       ansible.builtin.unarchive:
         src : "{{ debian_package }}"
-        dest : .
+        dest : /tmp/packages-microsoft-prod.deb
         remote_src: yes
+      ansible.builtin.apt:
+        name : packages-microsoft-prod.deb
 
     - name : install reguired packages(dotnet, unzip and ngnix)
       ansible.builtin.package:
