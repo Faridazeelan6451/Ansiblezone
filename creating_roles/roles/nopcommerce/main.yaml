@@ -1,0 +1,82 @@
+---
+- name : install nopcommerce in ubuntu
+  become : yes
+  hosts : webserver
+  tasks:
+    - name : fail when distribution is not ubuntu
+      ansible.builtin.fail:
+        msg: this will fail when the distribution is not ubuntu
+      when: ansible_facts['distribution'] != 'Ubuntu'
+    - name : dowload and install debian packages
+      ansible.builtin.unarchive:
+        src : {{ debian_package }}
+        dest : /home
+        remote_src: yes
+
+    - name : install reguired packages(dotnet, unzip and ngnix)
+      ansible.builtin.package:
+        name : 
+         - {{ dotnet_package }}
+         - unzip
+         - {{ nginx_service}}
+        state : present
+    
+    - name : start ngnix service
+      ansible.builtin.systemd:
+        name : {{ nginx_service}}
+        state: started
+    
+    - name : ngnix servercongiguration
+      ansible.builtin.template:
+        src : ./templates/server-configuration.j2
+        dest: /etc/nginx/sites-available/default
+    
+    - name : create directory
+      ansible.builtin.file: 
+        path: /var/www/nopCommerce
+        state: directory
+    
+    - name : download and install nopcommerce
+      ansible.builtin.unarchive:
+        src : https://github.com/nopSolutions/nopCommerce/releases/download/release-4.70.4/nopCommerce_4.70.4_NoSource_linux_x64.zip
+        dest: /var/www/nopCommerce
+    
+    - name : create bin log directory
+      ansible.builtin.file: 
+        path: 
+          - bin
+          - logs
+        state: directory
+    
+    - name : Recurcively change permission of nopcommerce file 
+      ansible.builtin.file:
+        path : nopCommerce/
+        state: file
+        recurse: yes
+        owner: www-data
+        group: www-data
+    
+    - name : configure nop service
+      ansible.builtin.template:
+        src : ./templates/server-configuration.j2
+        dest: /etc/systemd/system/nopCommerce.service
+    
+    - name : Start nop service
+      ansible.builtin.systemd:
+        name: nopCommerce.service
+        state: started
+    
+    - name : Restart ngnix
+      ansible.builtin.systemd:
+        name: nginx
+        state: restarted
+
+        
+       
+      
+    
+
+
+
+         
+
