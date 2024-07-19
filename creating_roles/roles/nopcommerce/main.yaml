@@ -10,7 +10,7 @@
     - name : dowload and install debian packages
       ansible.builtin.unarchive:
         src : "{{ debian_package }}"
-        dest : /home
+        dest : .
         remote_src: yes
 
     - name : install reguired packages(dotnet, unzip and ngnix)
